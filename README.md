@@ -88,6 +88,8 @@ $ npm run dev
 <img src="https://img.shields.io/badge/chakra ui-319795?style=for-the-badge&logo=chakraui&logoColor=white">
 <!-- MUI -->
 <img src="https://img.shields.io/badge/mui-007FFF?style=for-the-badge&logo=mui&logoColor=white">
+<!-- ChartJS -->
+<img src="https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=Chart.js&logoColor=white">
 <!-- styled-components -->
 <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
 <!-- emotion -->
