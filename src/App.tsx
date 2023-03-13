@@ -1,3 +1,5 @@
+import { MainPage } from 'pages/index';
+
 export default function App() {
-  return <div></div>;
+  return <MainPage />;
 }
