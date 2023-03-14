@@ -1,3 +1,5 @@
+import Chart from './pages/Chart';
+
 export default function App() {
-  return <div></div>;
+  return <Chart />;
 }
