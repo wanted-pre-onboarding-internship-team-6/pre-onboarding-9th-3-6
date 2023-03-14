@@ -1,5 +1,5 @@
-import Chart from './pages/Chart';
+import ClockChart from './pages/Chart';
 
 export default function App() {
-  return <Chart />;
+  return <ClockChart />;
 }
