@@ -74,7 +74,7 @@ const Home = () => {
       },
     },
     scales: {
-      y: {
+      AreaY: {
         type: 'linear' as const,
         display: true,
         position: 'left' as const,
@@ -88,7 +88,7 @@ const Home = () => {
           scale.max = scale.max * 2.1;
         },
       },
-      y1: {
+      BarY: {
         type: 'linear' as const,
         display: true,
         position: 'right' as const,
@@ -116,7 +116,7 @@ const Home = () => {
         fill: true,
         data: arrayOfData.map((el) => el.value_area),
         // data: arrayOfData,
-        yAxisID: 'y',
+        yAxisID: 'AreaY',
         // parsing: {
         //   // xAxisKey: 'time',
         //   yAxisKey: 'value_area',
@@ -131,7 +131,7 @@ const Home = () => {
         fill: true,
         data: arrayOfData.map((el) => el.value_bar),
         // data: arrayOfData,
-        yAxisID: 'y1',
+        yAxisID: 'BarY',
         // parsing: {
         //   // xAxisKey: 'time',
         //   yAxisKey: 'value_bar',
@@ -139,62 +139,6 @@ const Home = () => {
       },
     ],
   };
-
-  // const options = {
-  //   responsive: true,
-  //   interaction: {
-  //     mode: 'index' as const,
-  //     intersect: false,
-  //   },
-  //   stacked: false,
-  //   plugins: {
-  //     legend: {
-  //       position: 'top' as const,
-  //     },
-  //     title: {
-  //       display: true,
-  //       text: 'Flexsys',
-  //     },
-  //   },
-  //   scales: {
-  //     y: {
-  //       type: 'linear' as const,
-  //       display: true,
-  //       position: 'left' as const,
-  //     },
-  //     y1: {
-  //       type: 'linear' as const,
-  //       display: true,
-  //       position: 'right' as const,
-  //       grid: {
-  //         drawOnChartArea: false,
-  //       },
-  //     },
-  //   },
-  // };
-
-  // const data = {
-  //   labels,
-  //   datasets: [
-  //     {
-  //       fill: true,
-  //       label: 'area',
-  //       data: AreaArray,
-  //       borderColor: 'rgb(53, 162, 235)',
-  //       backgroundColor: 'rgba(53, 162, 235, 0.5)',
-  //       yAxisID: 'y',
-  //     },
-  //     {
-  //       label: 'bar',
-  //       data: BarArray,
-  //       borderColor: 'rgb(255, 99, 132)',
-  //       backgroundColor: 'rgba(255, 99, 132, 0.5)',
-  //       yAxisID: 'y1',
-  //     },
-  //   ],
-  // };
-
-  console.log(arrayOfData);
 
   return (
     <div>
