@@ -36,6 +36,7 @@
   "plugins": ["react", "@typescript-eslint", "import"],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
+    "react-hooks/exhaustive-deps": "off",
     "padding-line-between-statements": [
       "error",
       { "blankLine": "always", "prev": "*", "next": "return" }
