@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 import {
   Chart as ChartJS,
-  CategoryScale,
   LinearScale,
+  TimeSeriesScale,
   BarElement,
   PointElement,
   LineElement,
@@ -14,13 +14,14 @@ import {
   ChartOptions,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
+import 'chartjs-adapter-moment';
 
 ChartJS.register(
-  CategoryScale,
-  LinearScale,
+  TimeSeriesScale,
   BarElement,
   PointElement,
   LineElement,
+  LinearScale,
   Title,
   Tooltip,
   Filler,
@@ -56,16 +57,16 @@ export default function ChartPage() {
     fetchData();
   }, []);
 
+  const labels = Object.keys(charts.response);
+
   const data = {
-    labels: Object.keys(charts.response),
+    labels: labels,
     datasets: [
       {
         type: 'line' as const,
         fill: true,
         label: 'Area',
-        data: Object.keys(charts.response).map(
-          (e) => charts.response[e].value_area,
-        ),
+        data: labels.map((e) => charts.response[e].value_area),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132,0.5)',
         yAxisID: 'areaY',
@@ -73,9 +74,7 @@ export default function ChartPage() {
       {
         type: 'bar' as const,
         label: 'Bar',
-        data: Object.keys(charts.response).map(
-          (e) => charts.response[e].value_bar,
-        ),
+        data: labels.map((e) => charts.response[e].value_bar),
         backgroundColor: 'rgb(75, 192, 192)',
         yAxisID: 'barY',
       },
@@ -85,6 +84,16 @@ export default function ChartPage() {
   const options: ChartOptions = {
     responsive: true,
     scales: {
+      x: {
+        type: 'timeseries',
+        time: {
+          unit: 'minute',
+          displayFormats: {
+            minute: 'hh:mm a',
+          },
+        },
+        bounds: 'data',
+      },
       areaY: {
         max: 200,
         position: 'left',
