@@ -98,6 +98,10 @@ export default function App() {
   const data = { labels, datasets };
 
   const options: ChartOptions = {
+    interaction: {
+      mode: 'index',
+      intersect: true,
+    },
     scales: {
       bar: {
         type: 'linear',
@@ -119,20 +123,35 @@ export default function App() {
         // ...defineAxisRange(areaData),
       },
     },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          title: (context) => {
+            const {
+              dataset: { data },
+              dataIndex,
+            } = context[0];
+            const { region } = data[dataIndex] as unknown as { region: string };
+
+            return region;
+          },
+        },
+      },
+    },
   };
 
   useEffect(() => {
     async function fetchChartDatas() {
       const res = await fetch('/flexsys_mock_data.json');
       const { response } = (await res.json()) as ChartDataResponse;
-      const chartDatas = Object.entries(response).map(
-        ([key, { id, value_bar, value_area }]) => ({
+      const chartDatas = Object.entries(response)
+        .map(([key, { id, value_bar, value_area }]) => ({
           bar: value_bar,
           area: value_area,
           region: id,
           timestamp: key,
-        }),
-      );
+        }))
+        .slice(0, 10);
 
       setChartDatas(chartDatas);
     }
@@ -145,7 +164,7 @@ export default function App() {
       {chartDatas.length === 0 ? (
         <div>Loading...</div>
       ) : (
-        <div style={{ position: 'relative', width: '80vw', height: '40vh' }}>
+        <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
           <Chart type={CHART_TYPE.bar} data={data} options={options} />
         </div>
       )}
