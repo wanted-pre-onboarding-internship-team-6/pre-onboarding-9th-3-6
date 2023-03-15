@@ -46,19 +46,33 @@ interface ChartData {
     value_area: number;
   };
 }
+interface ChartDataResponse {
+  type: string;
+  version: number;
+  response: ChartData;
+}
+
+interface reformedChartData {
+  bar: number;
+  area: number;
+  region: string;
+  timestamp: string;
+}
 
 export default function App() {
-  const [chartData, setChartData] = useState<ChartData[]>([]);
+  const [chartDatas, setChartDatas] = useState<reformedChartData[]>([]);
 
-  const labels = Object.keys(chartData);
-  const barData = Object.values(chartData).map((data) => data.value_bar);
-  const areaData = Object.values(chartData).map((data) => data.value_area);
+  const labels = chartDatas.map((data) => data.timestamp);
 
   const barDataset = {
     type: CHART_TYPE.bar,
     label: 'bar_value',
-    data: barData,
+    data: chartDatas,
     yAxidID: 'bar',
+    parsing: {
+      xAxisKey: 'timestamp',
+      yAxisKey: 'bar',
+    },
     borderWidth: 2,
     borderColor: 'rgb(255, 99, 132)',
     backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -67,8 +81,12 @@ export default function App() {
   const areaDataset = {
     type: CHART_TYPE.line,
     label: 'area_value',
-    data: areaData,
+    data: chartDatas,
     yAxisID: 'area',
+    parsing: {
+      xAxisKey: 'timestamp',
+      yAxisKey: 'area',
+    },
     borderWidth: 2,
     borderColor: 'rgb(53, 162, 235)',
     backgroundColor: 'rgba(53, 162, 235, 0.5)',
@@ -104,20 +122,27 @@ export default function App() {
   };
 
   useEffect(() => {
-    async function fetchChartData() {
-      const response = await fetch('/flexsys_mock_data.json');
-      const data = await response.json();
+    async function fetchChartDatas() {
+      const res = await fetch('/flexsys_mock_data.json');
+      const { response } = (await res.json()) as ChartDataResponse;
+      const chartDatas = Object.entries(response).map(
+        ([key, { id, value_bar, value_area }]) => ({
+          bar: value_bar,
+          area: value_area,
+          region: id,
+          timestamp: key,
+        }),
+      );
 
-      Object.entries(data).map(([key, value]) => ({ [key]: value }));
-      setChartData(data.response);
+      setChartDatas(chartDatas);
     }
 
-    if (chartData.length === 0) fetchChartData();
-  }, [chartData.length]);
+    if (chartDatas.length === 0) fetchChartDatas();
+  }, [chartDatas.length]);
 
   return (
     <>
-      {chartData.length === 0 ? (
+      {chartDatas.length === 0 ? (
         <div>Loading...</div>
       ) : (
         <div style={{ position: 'relative', width: '80vw', height: '40vh' }}>
