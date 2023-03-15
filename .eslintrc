@@ -35,6 +35,8 @@
   },
   "plugins": ["react", "@typescript-eslint", "import"],
   "rules": {
+    "no-console": "warn",
+    "@typescript-eslint/no-explicit-any": "off",
     "padding-line-between-statements": [
       "error",
       { "blankLine": "always", "prev": "*", "next": "return" }
