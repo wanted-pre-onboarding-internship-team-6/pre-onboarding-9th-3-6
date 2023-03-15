@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-
 import {
   Chart as ChartJS,
   LinearScale,
@@ -54,7 +53,7 @@ export default function MainPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const checkedRegion = searchParams.getAll('region');
 
-  const labels = Object.keys(chartData);
+  const labels = Object.keys(chartData); //Object.keys(chartData); Object.entries(chartData).map(([key, value]) => key + value.id,);
   const regionData = [
     ...new Set(Object.values(chartData).map((data) => data.id)),
   ];
@@ -67,11 +66,11 @@ export default function MainPage() {
     data: barData,
     yAxidID: 'y',
     borderWidth: 2,
-    borderColor: regionData.map((data) =>
-      checkedRegion.includes(data) ? '#bef800' : 'rgb(255, 99, 132)',
+    borderColor: Object.values(chartData).map((value) =>
+      checkedRegion.includes(value.id) ? '#bef800' : 'rgb(255, 99, 132)',
     ),
-    backgroundColor: regionData.map((data) =>
-      checkedRegion.includes(data) ? '#bef800' : 'rgba(255, 99, 132, 0.5)',
+    backgroundColor: Object.values(chartData).map((value) =>
+      checkedRegion.includes(value.id) ? '#bef800' : 'rgba(255, 99, 132, 0.5)',
     ),
   };
 
@@ -81,13 +80,14 @@ export default function MainPage() {
     data: areaData,
     yAxisID: 'y1',
     borderWidth: 2,
-    borderColor: regionData.map((data) =>
-      checkedRegion.includes(data) ? '#bef800' : 'rgb(53, 162, 235)',
+    // borderColor: Object.values(chartData).map((value) =>
+    //   checkedRegion.includes(value.id) ? '#bef800' : 'rgb(53, 162, 235)',
+    // ),
+    backgroundColor: Object.values(chartData).map((value) =>
+      checkedRegion.includes(value.id) ? '#bef800' : 'rgb(53, 162, 235, 0.5)',
     ),
-    backgroundColor: regionData.map((data) =>
-      checkedRegion.includes(data) ? '#bef800' : 'rgba(53, 162, 235, 0.5)',
-    ),
-    fill: true,
+
+    // fill: true,
   };
 
   const datasets = [areaDataset, barDataset];
@@ -95,6 +95,10 @@ export default function MainPage() {
   const data = { labels, datasets };
 
   const options: ChartOptions = {
+    onClick: (event, legendItem, legend) => {
+      const checked = legend.tooltip?.title[0];
+      addParams(checked || '');
+    },
     scales: {
       y: {
         type: 'linear',
@@ -182,7 +186,7 @@ export default function MainPage() {
       {labels.length === 0 ? (
         <div>Loading...</div>
       ) : (
-        <div style={{ position: 'relative', width: '80vw' }}>
+        <div style={{ position: 'relative', width: '200%' }}>
           <Chart type={CHART_TYPE.bar} data={data} options={options} />
         </div>
       )}
