@@ -48,7 +48,7 @@ interface ChartData {
 }
 
 export default function App() {
-  const [chartData, setChartData] = useState<ChartData[]>([]);
+  const [chartData, setChartData] = useState<ChartData>({});
 
   const labels = Object.keys(chartData);
   const barData = Object.values(chartData).map((data) => data.value_bar);
@@ -58,7 +58,7 @@ export default function App() {
     type: CHART_TYPE.bar,
     label: 'bar_value',
     data: barData,
-    yAxidID: 'bar',
+    yAxidID: 'y',
     borderWidth: 2,
     borderColor: 'rgb(255, 99, 132)',
     backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -68,7 +68,7 @@ export default function App() {
     type: CHART_TYPE.line,
     label: 'area_value',
     data: areaData,
-    yAxisID: 'area',
+    yAxisID: 'y1',
     borderWidth: 2,
     borderColor: 'rgb(53, 162, 235)',
     backgroundColor: 'rgba(53, 162, 235, 0.5)',
@@ -81,7 +81,7 @@ export default function App() {
 
   const options: ChartOptions = {
     scales: {
-      bar: {
+      y: {
         type: 'linear',
         display: true,
         position: 'left',
@@ -90,7 +90,7 @@ export default function App() {
           text: 'bar_value',
         },
       },
-      area: {
+      y1: {
         type: 'linear',
         display: true,
         position: 'right',
@@ -98,7 +98,17 @@ export default function App() {
           display: true,
           text: 'area_value',
         },
-        // ...defineAxisRange(areaData),
+      },
+    },
+    interaction: {
+      intersect: false,
+      mode: 'index',
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          title: (tooltipItems) => chartData[tooltipItems[0].label].id,
+        },
       },
     },
   };
@@ -107,20 +117,20 @@ export default function App() {
     async function fetchChartData() {
       const response = await fetch('/flexsys_mock_data.json');
       const data = await response.json();
-
       Object.entries(data).map(([key, value]) => ({ [key]: value }));
       setChartData(data.response);
     }
 
-    if (chartData.length === 0) fetchChartData();
-  }, [chartData.length]);
+    // if (chartData.length === 0) fetchChartData();
+    if (labels.length === 0) fetchChartData();
+  }, [labels.length]); //chartData.length
 
   return (
     <>
-      {chartData.length === 0 ? (
+      {labels.length === 0 ? (
         <div>Loading...</div>
       ) : (
-        <div style={{ position: 'relative', width: '80vw', height: '40vh' }}>
+        <div style={{ position: 'relative', width: '80vw' }}>
           <Chart type={CHART_TYPE.bar} data={data} options={options} />
         </div>
       )}
