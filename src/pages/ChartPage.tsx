@@ -33,12 +33,12 @@ ChartJS.register(
   Filler,
 );
 
-// function defineAxisRange(values) {
-//   const min = Math.floor(Math.min(...values) * 0.5);
-//   const max = Math.floor(Math.max(...values) * 1.5);
+function defineAxisRange(values: number[]) {
+  const min = Math.floor(Math.min(...values) * 0.5);
+  const max = Math.floor(Math.max(...values) * 1.5);
 
-//   return { min, max };
-// }
+  return { min, max };
+}
 
 interface ChartData {
   [timestamp: string]: {
@@ -59,6 +59,9 @@ export default function ChartPage() {
   const regionData = Object.values(chartData).map((data) => String(data.id));
   const barData = Object.values(chartData).map((data) => data.value_bar);
   const areaData = Object.values(chartData).map((data) => data.value_area);
+  const areaDataNumbers = Object.values(chartData).map((data) =>
+    Number(data.value_area),
+  );
 
   const regionCategory = Array.from(new Set(regionData));
 
@@ -132,7 +135,7 @@ export default function ChartPage() {
           display: true,
           text: 'area_value',
         },
-        // ...defineAxisRange(areaData),
+        ...defineAxisRange(areaDataNumbers),
       },
     },
     plugins: {
@@ -145,6 +148,11 @@ export default function ChartPage() {
           },
         },
       },
+    },
+    onClick(event, elements) {
+      const index = elements[0].index;
+      const id = regionData[index];
+      setSearchParams(region !== id ? { id: id } : {});
     },
   };
 
