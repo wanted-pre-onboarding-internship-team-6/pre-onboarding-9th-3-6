@@ -51,6 +51,7 @@ export default function App() {
   const [chartData, setChartData] = useState<ChartData[]>([]);
 
   const labels = Object.keys(chartData);
+  const idData = Object.values(chartData).map((data) => data.id);
   const barData = Object.values(chartData).map((data) => data.value_bar);
   const areaData = Object.values(chartData).map((data) => data.value_area);
 
@@ -58,7 +59,7 @@ export default function App() {
     type: CHART_TYPE.bar,
     label: 'bar_value',
     data: barData,
-    yAxidID: 'bar',
+    yAxidID: 'y',
     borderWidth: 2,
     borderColor: 'rgb(255, 99, 132)',
     backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -68,7 +69,7 @@ export default function App() {
     type: CHART_TYPE.line,
     label: 'area_value',
     data: areaData,
-    yAxisID: 'area',
+    yAxisID: 'y1',
     borderWidth: 2,
     borderColor: 'rgb(53, 162, 235)',
     backgroundColor: 'rgba(53, 162, 235, 0.5)',
@@ -80,8 +81,12 @@ export default function App() {
   const data = { labels, datasets };
 
   const options: ChartOptions = {
+    interaction: {
+      mode: 'index',
+      intersect: false,
+    },
     scales: {
-      bar: {
+      y: {
         type: 'linear',
         display: true,
         position: 'left',
@@ -90,7 +95,7 @@ export default function App() {
           text: 'bar_value',
         },
       },
-      area: {
+      y1: {
         type: 'linear',
         display: true,
         position: 'right',
@@ -99,6 +104,17 @@ export default function App() {
           text: 'area_value',
         },
         // ...defineAxisRange(areaData),
+      },
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          afterTitle: function (tooltip) {
+            const index = tooltip[0].dataIndex;
+
+            return `${idData[index]}`;
+          },
+        },
       },
     },
   };
@@ -120,7 +136,7 @@ export default function App() {
       {chartData.length === 0 ? (
         <div>Loading...</div>
       ) : (
-        <div style={{ position: 'relative', width: '80vw', height: '40vh' }}>
+        <div style={{ position: 'relative', width: '80vw', height: '80vh' }}>
           <Chart type={CHART_TYPE.bar} data={data} options={options} />
         </div>
       )}
