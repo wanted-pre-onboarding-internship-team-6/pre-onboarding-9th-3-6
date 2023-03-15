@@ -14,6 +14,7 @@ import {
   BarController,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
+import { useSearchParams } from 'react-router-dom';
 
 import { CHART_TYPE } from '@/constants';
 
@@ -31,13 +32,6 @@ ChartJS.register(
   BarController,
   Filler,
 );
-
-// function defineAxisRange(values) {
-//   const min = Math.floor(Math.min(...values) * 0.5);
-//   const max = Math.floor(Math.max(...values) * 1.5);
-
-//   return { min, max };
-// }
 
 interface ChartData {
   [timestamp: string]: {
@@ -61,35 +55,58 @@ interface reformedChartData {
 
 export default function ChartPage() {
   const [chartDatas, setChartDatas] = useState<reformedChartData[]>([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const selectedRegion = searchParams.get('region');
 
   const labels = chartDatas.map((data) => data.timestamp);
+
+  const regions = [...new Set(chartDatas.map((data) => data.region))];
+
+  function paintColor(data: any) {
+    return data.raw.region === selectedRegion
+      ? 'rgb(255, 52, 96)'
+      : 'rgba(255, 52, 96, 0.4)';
+  }
 
   const barDataset = {
     type: CHART_TYPE.bar,
     label: 'bar_value',
     data: chartDatas,
-    yAxidID: 'bar',
+    yAxidID: 'y-bar',
     parsing: {
       xAxisKey: 'timestamp',
       yAxisKey: 'bar',
     },
     borderWidth: 2,
-    borderColor: 'rgb(255, 99, 132)',
-    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    borderColor: paintColor,
+    backgroundColor: paintColor,
   };
 
   const areaDataset = {
     type: CHART_TYPE.line,
     label: 'area_value',
     data: chartDatas,
-    yAxisID: 'area',
+    yAxisID: 'y-area',
     parsing: {
       xAxisKey: 'timestamp',
       yAxisKey: 'area',
     },
-    borderWidth: 2,
-    borderColor: 'rgb(53, 162, 235)',
-    backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    pointBorderWidth: (data: any) =>
+      data.raw.region === selectedRegion ? 5 : 1,
+    pointBorderColor: (data: any) =>
+      data.raw.region === selectedRegion
+        ? 'rgb(53, 162, 235, 1)'
+        : 'rgba(53, 162, 235, 0.4)',
+    pointHoverBorderWidth: (data: any) =>
+      data.raw.region === selectedRegion ? 5 : 1,
+    pointHoverBorderColor: (data: any) =>
+      data.raw.region === selectedRegion
+        ? 'rgb(53, 162, 235, 1)'
+        : 'rgba(53, 162, 235, 0.4)',
+    borderWidth: 1,
+    borderColor: 'rgb(53, 162, 235, 0.4)',
+    backgroundColor: 'rgba(53, 162, 235, 0.4)',
     fill: true,
   };
 
@@ -103,25 +120,29 @@ export default function ChartPage() {
       intersect: true,
     },
     scales: {
-      bar: {
+      ['y-bar']: {
         type: 'linear',
-        display: true,
         position: 'left',
         title: {
           display: true,
           text: 'bar_value',
         },
       },
-      area: {
+      ['y-area']: {
         type: 'linear',
-        display: true,
         position: 'right',
         title: {
           display: true,
           text: 'area_value',
         },
-        // ...defineAxisRange(areaData),
+        min: 0,
+        max: 200,
       },
+    },
+    onClick(_, elements) {
+      if (elements.length === 0) return;
+      const region = chartDatas[elements[0].index].region;
+      setSearchParams({ region });
     },
     plugins: {
       tooltip: {
@@ -144,14 +165,14 @@ export default function ChartPage() {
     async function fetchChartDatas() {
       const res = await fetch('/flexsys_mock_data.json');
       const { response } = (await res.json()) as ChartDataResponse;
-      const chartDatas = Object.entries(response)
-        .map(([key, { id, value_bar, value_area }]) => ({
+      const chartDatas = Object.entries(response).map(
+        ([key, { id, value_bar, value_area }]) => ({
           bar: value_bar,
           area: value_area,
           region: id,
           timestamp: key,
-        }))
-        .slice(0, 10);
+        }),
+      );
 
       setChartDatas(chartDatas);
     }
@@ -164,9 +185,17 @@ export default function ChartPage() {
       {chartDatas.length === 0 ? (
         <div>Loading...</div>
       ) : (
-        <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
-          <Chart type={CHART_TYPE.bar} data={data} options={options} />
-        </div>
+        <>
+          {regions.map((region) => (
+            <button key={region} onClick={() => setSearchParams({ region })}>
+              {region}
+            </button>
+          ))}
+          <div
+            style={{ position: 'relative', width: '100vw', height: '100vh' }}>
+            <Chart type={CHART_TYPE.bar} data={data} options={options} />
+          </div>
+        </>
       )}
     </>
   );
