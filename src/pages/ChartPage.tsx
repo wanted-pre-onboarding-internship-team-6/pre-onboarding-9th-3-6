@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import {
   Chart as ChartJS,
   LinearScale,
@@ -17,6 +15,8 @@ import { Chart } from 'react-chartjs-2';
 import { useSearchParams } from 'react-router-dom';
 
 import { CHART_TYPE } from '@/constants';
+import { useChartDatas } from '@/hooks';
+import { extractRegionFrom } from '@/utils';
 
 import type { ChartOptions } from 'chart.js';
 
@@ -33,28 +33,8 @@ ChartJS.register(
   Filler,
 );
 
-interface ChartData {
-  [timestamp: string]: {
-    id: string;
-    value_bar: number;
-    value_area: number;
-  };
-}
-interface ChartDataResponse {
-  type: string;
-  version: number;
-  response: ChartData;
-}
-
-interface reformedChartData {
-  bar: number;
-  area: number;
-  region: string;
-  timestamp: string;
-}
-
 export default function ChartPage() {
-  const [chartDatas, setChartDatas] = useState<reformedChartData[]>([]);
+  const { isLoading, chartDatas, error } = useChartDatas();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const selectedRegion = searchParams.get('region');
@@ -139,64 +119,33 @@ export default function ChartPage() {
         max: 200,
       },
     },
-    onClick(_, elements) {
+    onClick: (_, elements) => {
       if (elements.length === 0) return;
-      const region = chartDatas[elements[0].index].region;
+      const region = extractRegionFrom(elements, chartDatas);
       setSearchParams({ region });
     },
     plugins: {
       tooltip: {
         callbacks: {
-          title: (context) => {
-            const {
-              dataset: { data },
-              dataIndex,
-            } = context[0];
-            const { region } = data[dataIndex] as unknown as { region: string };
-
-            return region;
-          },
+          title: (context) => extractRegionFrom(context, chartDatas),
         },
       },
     },
   };
 
-  useEffect(() => {
-    async function fetchChartDatas() {
-      const res = await fetch('/flexsys_mock_data.json');
-      const { response } = (await res.json()) as ChartDataResponse;
-      const chartDatas = Object.entries(response).map(
-        ([key, { id, value_bar, value_area }]) => ({
-          bar: value_bar,
-          area: value_area,
-          region: id,
-          timestamp: key,
-        }),
-      );
-
-      setChartDatas(chartDatas);
-    }
-
-    if (chartDatas.length === 0) fetchChartDatas();
-  }, [chartDatas.length]);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>error</div>;
 
   return (
     <>
-      {chartDatas.length === 0 ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          {regions.map((region) => (
-            <button key={region} onClick={() => setSearchParams({ region })}>
-              {region}
-            </button>
-          ))}
-          <div
-            style={{ position: 'relative', width: '100vw', height: '100vh' }}>
-            <Chart type={CHART_TYPE.bar} data={data} options={options} />
-          </div>
-        </>
-      )}
+      {regions.map((region) => (
+        <button key={region} onClick={() => setSearchParams({ region })}>
+          {region}
+        </button>
+      ))}
+      <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
+        <Chart type={CHART_TYPE.bar} data={data} options={options} />
+      </div>
     </>
   );
 }
