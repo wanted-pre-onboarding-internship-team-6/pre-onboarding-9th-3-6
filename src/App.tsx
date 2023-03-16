@@ -32,13 +32,6 @@ ChartJS.register(
   Filler,
 );
 
-// function defineAxisRange(values) {
-//   const min = Math.floor(Math.min(...values) * 0.5);
-//   const max = Math.floor(Math.max(...values) * 1.5);
-
-//   return { min, max };
-// }
-
 interface ChartData {
   [timestamp: string]: {
     id: string;
@@ -49,16 +42,35 @@ interface ChartData {
 
 export default function App() {
   const [chartData, setChartData] = useState<ChartData[]>([]);
+  const [regions, setRegions] = useState('');
+
+  const newDatas = Object.entries(chartData).map((newData: any) => {
+    const groupInfo = newData[1];
+    const time = newData[0];
+    const results = { ...groupInfo, time };
+
+    return results;
+  });
+
+  // const filteredDatas = newDatas.filter((data) => data.id === regions);
+  const filteredRegions = [...new Set(newDatas.map((data) => data.id))];
 
   const labels = Object.keys(chartData);
   const barData = Object.values(chartData).map((data) => data.value_bar);
   const areaData = Object.values(chartData).map((data) => data.value_area);
 
+  const idAndTimeData = Object.entries(chartData).map((data) => {
+    const idGroup = data[1].id;
+    const timeGroup = data[0];
+
+    return { id: idGroup, time: timeGroup };
+  });
+
   const barDataset = {
     type: CHART_TYPE.bar,
     label: 'bar_value',
     data: barData,
-    yAxidID: 'bar',
+    yAxidID: 'y',
     borderWidth: 2,
     borderColor: 'rgb(255, 99, 132)',
     backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -68,7 +80,7 @@ export default function App() {
     type: CHART_TYPE.line,
     label: 'area_value',
     data: areaData,
-    yAxisID: 'area',
+    yAxisID: 'y1',
     borderWidth: 2,
     borderColor: 'rgb(53, 162, 235)',
     backgroundColor: 'rgba(53, 162, 235, 0.5)',
@@ -76,12 +88,15 @@ export default function App() {
   };
 
   const datasets = [areaDataset, barDataset];
-
-  const data = { labels, datasets };
-
+  const data = { labels: labels, datasets };
   const options: ChartOptions = {
+    interaction: {
+      mode: 'index',
+      intersect: true,
+    },
+
     scales: {
-      bar: {
+      y: {
         type: 'linear',
         display: true,
         position: 'left',
@@ -90,15 +105,34 @@ export default function App() {
           text: 'bar_value',
         },
       },
-      area: {
+      y1: {
         type: 'linear',
         display: true,
         position: 'right',
+
         title: {
           display: true,
           text: 'area_value',
         },
-        // ...defineAxisRange(areaData),
+      },
+    },
+
+    onClick: function (e: any) {
+      setRegions(e?.chart.tooltip.footer[0]);
+      e.chart.tooltip.dataPoints[0].dataset.borderColor = 'rgb(95, 255, 84)';
+      e.chart.update();
+    },
+    plugins: {
+      tooltip: {
+        enabled: true,
+        callbacks: {
+          footer: (context) => {
+            const labels = idAndTimeData.find(
+              (sub) => sub.time === context[0].label,
+            );
+            return labels.id;
+          },
+        },
       },
     },
   };
@@ -107,11 +141,8 @@ export default function App() {
     async function fetchChartData() {
       const response = await fetch('/flexsys_mock_data.json');
       const data = await response.json();
-
-      Object.entries(data).map(([key, value]) => ({ [key]: value }));
       setChartData(data.response);
     }
-
     if (chartData.length === 0) fetchChartData();
   }, [chartData.length]);
 
@@ -120,7 +151,20 @@ export default function App() {
       {chartData.length === 0 ? (
         <div>Loading...</div>
       ) : (
-        <div style={{ position: 'relative', width: '80vw', height: '40vh' }}>
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%,-50%)',
+            width: '80vw',
+            height: '80vh',
+          }}>
+          {filteredRegions.map((data, index) => (
+            <span key={index}>
+              <button>{data}</button>
+            </span>
+          ))}
           <Chart type={CHART_TYPE.bar} data={data} options={options} />
         </div>
       )}
