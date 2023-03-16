@@ -14,6 +14,7 @@ import {
   BarController,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
+import { useSearchParams } from 'react-router-dom';
 
 import { CHART_TYPE } from '@/constants';
 
@@ -49,38 +50,68 @@ interface ChartData {
 
 export default function App() {
   const [chartData, setChartData] = useState<ChartData[]>([]);
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const labels = Object.keys(chartData);
   const barData = Object.values(chartData).map((data) => data.value_bar);
   const areaData = Object.values(chartData).map((data) => data.value_area);
-
+  const regionData = Object.values(chartData).map((data) => data.id);
+  const sortedRegionData = [
+    ...new Set(Object.values(chartData).map((data) => data.id)),
+  ];
+  const selectedRegion: any = searchParams.get('region');
+ 
   const barDataset = {
     type: CHART_TYPE.bar,
     label: 'bar_value',
     data: barData,
     yAxidID: 'bar',
     borderWidth: 2,
-    borderColor: 'rgb(255, 99, 132)',
-    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    // borderColor: 'rgb(255, 99, 132)',
+    // backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    borderColor: regionData.map((data) =>
+      data === selectedRegion ? '#00f83e' : 'rgb(255, 99, 132)',
+    ),
+    backgroundColor: regionData.map((data) =>
+      data === selectedRegion ? '#00f83e' : 'rgba(255, 99, 132, 0.5)',
+    ),
   };
-
   const areaDataset = {
     type: CHART_TYPE.line,
     label: 'area_value',
     data: areaData,
     yAxisID: 'area',
     borderWidth: 2,
-    borderColor: 'rgb(53, 162, 235)',
-    backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    // borderColor: 'rgb(53, 162, 235)',
+    // backgroundColor: 'rgba(53, 162, 235, 0.5)',
     fill: true,
+    borderColor: regionData.map((data) =>
+    data === selectedRegion ? '#00f83e' : 'rgb(53, 162, 235)',
+  ),
+    backgroundColor: regionData.map((data) =>
+    data === selectedRegion ? '#00f83e' : 'rgba(53, 162, 235, 0.5)',
+  ),
   };
 
   const datasets = [areaDataset, barDataset];
 
   const data = { labels, datasets };
 
+
   const options: ChartOptions = {
-    scales: {
+  
+     plugins: {
+      tooltip: {
+        callbacks: {
+          beforeTitle: (context) => {
+            const dataKey : any = context[0].label;
+
+            const id = chartData[dataKey]?.id;
+
+            return `지역: ${id}`;
+          },
+        },
+      },
+    },scales: {
       bar: {
         type: 'linear',
         display: true,
@@ -99,7 +130,7 @@ export default function App() {
           text: 'area_value',
         },
         // ...defineAxisRange(areaData),
-      },
+      },  
     },
   };
 
@@ -117,6 +148,18 @@ export default function App() {
 
   return (
     <>
+    <h2>지역을 선택해주세요:</h2>
+     <div className='buttonContainer'>
+     {sortedRegionData.map((region) => {
+            return (
+              <button
+              key={region.id}
+              >
+                {region}
+              </button>
+            );
+          })}
+    </div>
       {chartData.length === 0 ? (
         <div>Loading...</div>
       ) : (
