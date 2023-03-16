@@ -14,9 +14,9 @@ import {
 import { Chart } from 'react-chartjs-2';
 import { useSearchParams } from 'react-router-dom';
 
-import { CHART_TYPE } from '@/constants';
+import { CHART_TYPE, COLOR_CODE } from '@/constants';
 import { useChartDatas } from '@/hooks';
-import { extractRegionFrom } from '@/utils';
+import { extractRegionFrom, makeChartColors } from '@/utils';
 
 import type { ChartOptions } from 'chart.js';
 
@@ -43,50 +43,37 @@ export default function ChartPage() {
 
   const regions = [...new Set(chartDatas.map((data) => data.region))];
 
-  function paintColor(data: any) {
-    return data.raw.region === selectedRegion
-      ? 'rgb(255, 52, 96)'
-      : 'rgba(255, 52, 96, 0.4)';
-  }
+  const barColors = makeChartColors('bar', chartDatas, selectedRegion);
+  const areaColors = makeChartColors('area', chartDatas, selectedRegion);
 
   const barDataset = {
     type: CHART_TYPE.bar,
     label: 'bar_value',
     data: chartDatas,
-    yAxidID: 'y-bar',
+    yAxidID: 'y',
     parsing: {
       xAxisKey: 'timestamp',
       yAxisKey: 'bar',
     },
     borderWidth: 2,
-    borderColor: paintColor,
-    backgroundColor: paintColor,
+    borderColor: barColors,
+    backgroundColor: barColors,
   };
 
   const areaDataset = {
     type: CHART_TYPE.line,
     label: 'area_value',
     data: chartDatas,
-    yAxisID: 'y-area',
+    yAxisID: 'y1',
     parsing: {
       xAxisKey: 'timestamp',
       yAxisKey: 'area',
     },
-    pointBorderWidth: (data: any) =>
-      data.raw.region === selectedRegion ? 5 : 1,
-    pointBorderColor: (data: any) =>
-      data.raw.region === selectedRegion
-        ? 'rgb(53, 162, 235, 1)'
-        : 'rgba(53, 162, 235, 0.4)',
-    pointHoverBorderWidth: (data: any) =>
-      data.raw.region === selectedRegion ? 5 : 1,
-    pointHoverBorderColor: (data: any) =>
-      data.raw.region === selectedRegion
-        ? 'rgb(53, 162, 235, 1)'
-        : 'rgba(53, 162, 235, 0.4)',
     borderWidth: 1,
-    borderColor: 'rgb(53, 162, 235, 0.4)',
-    backgroundColor: 'rgba(53, 162, 235, 0.4)',
+    borderColor: COLOR_CODE.blue,
+    backgroundColor: COLOR_CODE.blue,
+    pointBorderColor: areaColors,
+    pointHoverBorderColor: areaColors,
     fill: true,
   };
 
@@ -100,7 +87,7 @@ export default function ChartPage() {
       intersect: true,
     },
     scales: {
-      ['y-bar']: {
+      y: {
         type: 'linear',
         position: 'left',
         title: {
@@ -108,7 +95,7 @@ export default function ChartPage() {
           text: 'bar_value',
         },
       },
-      ['y-area']: {
+      y1: {
         type: 'linear',
         position: 'right',
         title: {
