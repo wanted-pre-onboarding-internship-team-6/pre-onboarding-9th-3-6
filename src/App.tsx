@@ -32,12 +32,12 @@ ChartJS.register(
   Filler,
 );
 
-// function defineAxisRange(values) {
-//   const min = Math.floor(Math.min(...values) * 0.5);
-//   const max = Math.floor(Math.max(...values) * 1.5);
+function defineAxisRange(values: any) {
+  const min = Math.floor(Math.min(...values) * 0.5);
+  const max = Math.floor(Math.max(...values) * 1.5);
 
-//   return { min, max };
-// }
+  return { min, max };
+}
 
 interface ChartData {
   [timestamp: string]: {
@@ -98,7 +98,30 @@ export default function App() {
           display: true,
           text: 'area_value',
         },
-        // ...defineAxisRange(areaData),
+        ...defineAxisRange(areaData),
+      },
+    },
+    layout: {
+      autoPadding: true,
+    },
+    responsive: true,
+    interaction: {
+      intersect: false,
+      mode: 'index',
+    },
+    plugins: {
+      tooltip: {
+        padding: 10,
+        bodySpacing: 5,
+        callbacks: {
+          afterTitle: (context): string => {
+            const dataKey: any = context[0].label;
+
+            const id = chartData[dataKey].id;
+
+            return `${id}`;
+          },
+        },
       },
     },
   };
@@ -120,9 +143,7 @@ export default function App() {
       {chartData.length === 0 ? (
         <div>Loading...</div>
       ) : (
-        <div style={{ position: 'relative', width: '80vw', height: '40vh' }}>
-          <Chart type={CHART_TYPE.bar} data={data} options={options} />
-        </div>
+        <Chart type={CHART_TYPE.bar} data={data} options={options} />
       )}
     </>
   );
