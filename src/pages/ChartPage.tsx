@@ -18,6 +18,8 @@ import { CHART_TYPE, COLOR_CODE } from '@/constants';
 import { useChartDatas } from '@/hooks';
 import { extractRegionFrom, makeChartColors } from '@/utils';
 
+import * as S from './style';
+
 import type { ChartOptions } from 'chart.js';
 
 ChartJS.register(
@@ -34,7 +36,7 @@ ChartJS.register(
 );
 
 export default function ChartPage() {
-  const { isLoading, chartDatas, error } = useChartDatas();
+  const { error, chartDatas } = useChartDatas();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const selectedRegion = searchParams.get('region');
@@ -120,19 +122,23 @@ export default function ChartPage() {
     },
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>error</div>;
+  if (error) return <S.Message>{error.message}</S.Message>;
 
   return (
-    <>
-      {regions.map((region) => (
-        <button key={region} onClick={() => setSearchParams({ region })}>
-          {region}
-        </button>
-      ))}
-      <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
+    <S.Container>
+      <S.Header>
+        <S.Title>시계열 차트</S.Title>
+        <S.BtnBox>
+          {regions.map((region) => (
+            <S.Button key={region} onClick={() => setSearchParams({ region })}>
+              {region}
+            </S.Button>
+          ))}
+        </S.BtnBox>
+      </S.Header>
+      <S.ChartBox>
         <Chart type={CHART_TYPE.bar} data={data} options={options} />
-      </div>
-    </>
+      </S.ChartBox>
+    </S.Container>
   );
 }
