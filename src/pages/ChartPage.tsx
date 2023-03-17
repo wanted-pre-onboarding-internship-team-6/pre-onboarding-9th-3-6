@@ -13,6 +13,7 @@ import {
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 import { useSearchParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { CHART_TYPE, COLOR_CODE } from '@/constants';
 import { useChartDatas } from '@/hooks';
@@ -126,13 +127,33 @@ export default function ChartPage() {
   return (
     <>
       {regions.map((region) => (
-        <button key={region} onClick={() => setSearchParams({ region })}>
+        <Button key={region} onClick={() => setSearchParams({ region })}>
           {region}
-        </button>
+        </Button>
       ))}
+      <Title>시계열 차트</Title>
       <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
         <Chart type={CHART_TYPE.bar} data={data} options={options} />
       </div>
     </>
   );
 }
+
+const Button = styled.button`
+  width: 100px;
+  height: 30px;
+  margin-right: 2px;
+  background-color: green;
+  color: white;
+  font-size: 18px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+`;
+
+const Title = styled.h3`
+  position: absolute;
+  display: inline;
+  top: -10px;
+  left: 45%;
+`;
