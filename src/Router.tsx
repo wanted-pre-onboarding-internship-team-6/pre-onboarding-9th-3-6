@@ -1,12 +1,17 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import { Layout } from '@/components';
 import { ChartPage } from '@/pages';
 
 export default function Router() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <ChartPage />,
+      element: (
+        <Layout>
+          <ChartPage />
+        </Layout>
+      ),
     },
   ]);
 
