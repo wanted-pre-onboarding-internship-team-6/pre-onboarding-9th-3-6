@@ -9,25 +9,25 @@ export default function useChartDatas() {
   const [chartDatas, setChartDatas] = useState<ReformedChartData[]>([]);
   const [error, setError] = useState<Error | null>(null);
 
+  const randomLoadingTime = Math.floor(Math.random() * 3) + 1;
+
   useEffect(() => {
-    async function fetchChartDatas() {
-      try {
-        const res = await fetch('/flexsys_mock_data.json');
-
-        if (!res.ok) throw new Error('네트워크 에러');
-
-        const { response } = (await res.json()) as ChartDataResponse;
-        const chartDatas = reformChartData(response);
-        setChartDatas(chartDatas);
-      } catch (error) {
-        setError(error as Error);
-      } finally {
-        setIsLoading(false);
+    setTimeout(() => {
+      async function fetchChartDatas() {
+        try {
+          const res = await fetch('/flexsys_mock_data.json');
+          const { response } = (await res.json()) as ChartDataResponse;
+          const chartDatas = reformChartData(response);
+          setChartDatas(chartDatas);
+        } catch (error) {
+          setError(error as Error);
+        } finally {
+          setIsLoading(false);
+        }
       }
-    }
-
-    if (chartDatas.length === 0) fetchChartDatas();
-  }, [chartDatas.length]);
+      if (chartDatas.length === 0) fetchChartDatas();
+    }, randomLoadingTime * 1000);
+  }, [chartDatas.length, randomLoadingTime]);
 
   return { isLoading, chartDatas, error };
 }
