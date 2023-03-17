@@ -18,6 +18,8 @@ import { CHART_TYPE, COLOR_CODE } from '@/constants';
 import { useChartDatas } from '@/hooks';
 import { extractRegionFrom, makeChartColors } from '@/utils';
 
+import RegionFilter from './RegionFilter';
+
 import type { ChartOptions } from 'chart.js';
 
 ChartJS.register(
@@ -121,11 +123,7 @@ export default function ChartPage() {
 
   return (
     <>
-      {regions.map((region) => (
-        <button key={region} onClick={() => setSearchParams({ region })}>
-          {region}
-        </button>
-      ))}
+      <RegionFilter regions={regions} />
       <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
         <ReactChart type={CHART_TYPE.bar} data={data} options={options} />
       </div>
