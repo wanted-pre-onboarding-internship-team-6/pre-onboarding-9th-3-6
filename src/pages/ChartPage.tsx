@@ -121,7 +121,7 @@ export default function ChartPage() {
   };
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>error</div>;
+  if (error) throw new Error('에러발생'); //return <div>error</div>;
 
   return (
     <>
