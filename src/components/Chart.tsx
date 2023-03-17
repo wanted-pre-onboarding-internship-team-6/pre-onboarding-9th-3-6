@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import {
   Chart as ChartJS,
   LinearScale,
@@ -124,9 +125,14 @@ export default function ChartPage() {
   return (
     <>
       <RegionFilter regions={regions} />
-      <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
+      <ChartContainer>
         <ReactChart type={CHART_TYPE.bar} data={data} options={options} />
-      </div>
+      </ChartContainer>
     </>
   );
 }
+
+const ChartContainer = styled.div({
+  position: 'relative',
+  width: '1000px',
+});
