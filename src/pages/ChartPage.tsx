@@ -113,6 +113,7 @@ export default function ChartPage() {
     },
     plugins: {
       tooltip: {
+        displayColors: false,
         callbacks: {
           title: (context) => extractRegionFrom(context, chartDatas),
         },
