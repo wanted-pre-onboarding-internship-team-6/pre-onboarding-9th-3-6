@@ -14,17 +14,10 @@ import {
 import { Chart as ReactChart } from 'react-chartjs-2';
 import { useSearchParams } from 'react-router-dom';
 
-import { fetchChartDatas } from '@/api';
 import { CHART_TYPE, COLOR_CODE } from '@/constants';
-import {
-  delayFailRandomly,
-  extractRegionFrom,
-  makeChartColors,
-  reformChartData,
-  suspend,
-} from '@/utils';
+import { useChartDatas } from '@/hooks';
+import { extractRegionFrom, makeChartColors } from '@/utils';
 
-import type { ChartData } from '@/types';
 import type { ChartOptions } from 'chart.js';
 
 ChartJS.register(
@@ -40,14 +33,11 @@ ChartJS.register(
   Filler,
 );
 
-const suspended = suspend(() => delayFailRandomly(fetchChartDatas));
-
 export default function ChartPage() {
+  const { chartDatas } = useChartDatas();
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedRegion = searchParams.get('region');
 
-  const response = suspended.promise.resolved() as ChartData;
-  const chartDatas = reformChartData(response);
   const labels = chartDatas.map((data) => data.timestamp);
   const regions = [...new Set(chartDatas.map((data) => data.region))];
 
