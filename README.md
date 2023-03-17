@@ -1,4 +1,4 @@
-# 원티드 프리온보딩 인턴십 N주차 기업과제 - 기업명
+# 원티드 프리온보딩 인턴십 3주차 기업과제 - Flexsys
 
 ## 📜 목차
 
@@ -13,81 +13,89 @@
 
 <!--  -->
 <br />
+<br />
 
 ## 📝 과제 소개
 
-### 진행 기간: 2023.03.13 ~ 2023.03.16 (4일)
+### 진행 기간: 2023.03.13 ~ 2023.03.17 (5일)
 
-이 과제는.....
+- AI기반 RPA 기술에 특화된 벤처기업 플렉시스의 기업과제입니다.
+- 주어진 mock 데이터를 기반으로 시계열 차트 만들기
+
+<br />
+<br />
+
+### 과제 요구사항
+
+1. 시계열 차트 만들기
+    - 주어진 JSON 데이터의 `key`값(시간)을 기반으로 시계열 차트를 만들어주세요
+    - 하나의 차트안에 Area 형태의 그래프와 Bar 형태의 그래프가 모두 존재하는 복합 그래프로 만들어주세요
+    - Area 그래프의 기준값은 `value_area` 값을 이용해주세요
+    - Bar 그래프의 기준값은 `value_bar` 값을 이용해주세요
+    - 차트의 Y축에 대략적인 수치를 표현해주세요(예시 이미지 참고)
+
+<br />
+
+2. 호버 기능 구현
+    - 특정 데이터 구역에 마우스 호버시 `id, value_area, value_bar` 데이터를 툴팁 형태로 제공해주세요
+
+<br />
+
+3. 필터링 기능 구현
+    - 필터링 기능을 구현해주세요, 필터링은 특정 데이터를 하이라이트 하는 방식으로 구현해주세요
+    - 필터링 기능은 버튼 형태로 ID값(지역이름)을 이용해주세요
+    - 필터링 시 버튼에서 선택한 ID값과 동일한 ID값을 가진 데이터 구역만 하이라이트 처리를 해주세요
+    - 특정 데이터 구역을 클릭 시에도 필터링 기능과 동일한 형태로 동일한 ID값을 가진 데이터 구역을 하이라이트해주세요
 
 <!--  -->
+<br />
 <br />
 
 ## 🕹️ 실행 방법
 
-```sh
-$ git clone 레포지토리 주소
-$ cd 레포지토리 이름
+```
+$ git clone https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6.git
+$ cd pre-onboarding-9th-3-6
 $ npm install
 $ npm run dev
 ```
 
 <!--  -->
 <br />
+<br />
 
 ## 🔗 배포 링크
 
-[바로 가기](./경로입력)
+[바로 가기](https://pre-onboarding-9th-3-6.vercel.app/)
 
 <!--  -->
+<br />
 <br />
 
 ## 🛠️ 기술 스택
 
 <!--
-  Shield.io 배지 양식
+[Shield.io](http://shield.io/) 배지 양식
 
-  <img src= "https://img.shields.io/badge/라벨-색상?style=배지스타일&logo=로고이름&logoColor=로고색상">
+<img src= "[https://img.shields.io/badge/라벨-색상?style=배지스타일&logo=로고이름&logoColor=로고색상](https://img.shields.io/badge/%EB%9D%BC%EB%B2%A8-%EC%83%89%EC%83%81?style=%EB%B0%B0%EC%A7%80%EC%8A%A4%ED%83%80%EC%9D%BC&logo=%EB%A1%9C%EA%B3%A0%EC%9D%B4%EB%A6%84&logoColor=%EB%A1%9C%EA%B3%A0%EC%83%89%EC%83%81)">
 
-  - 라벨: 임의의 이름
-  - 색상: https://simpleicons.org/ 에서 검색한 로고의 색상코드 (# 제외하고 입력)
-  - 배지 스타일: plastic, flat, flat-square, for-the-badge, social 중 하나 선택
-  - 로고 이름: https://simpleicons.org/ 에서 검색한 로고의 이름
-  - 로고 색상: 로고의 색상코드
+- 라벨: 임의의 이름
+- 색상: [https://simpleicons.org/](https://simpleicons.org/) 에서 검색한 로고의 색상코드 (# 제외하고 입력)
+- 배지 스타일: plastic, flat, flat-square, for-the-badge, social 중 하나 선택
+- 로고 이름: [https://simpleicons.org/](https://simpleicons.org/) 에서 검색한 로고의 이름
+- 로고 색상: 로고의 색상코드
 -->
 <p>
 <!-- npm -->
 <img src= "https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
-<!-- Yarn -->
-<img src= "https://img.shields.io/badge/yarn-2C8EBB?style=for-the-badge&logo=yarn&logoColor=white">
-<!-- CRA -->
-<img src= "https://img.shields.io/badge/cra-09D3AC?style=for-the-badge&logo=create-react-app&logoColor=white">
 <!-- Vite -->
 <img src= "https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
-<!-- JavasScript -->
-<img src= "https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
 <!-- Typescript -->
 <img src= "https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
 <!-- React -->
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
-<!-- Next.js -->
-<img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white">
-<!-- Redux Toolkit -->
-<img src="https://img.shields.io/badge/redux tooklit-764ABC?style=for-the-badge&logo=redux&logoColor=white">
-<!-- zustand -->
-<img src="https://img.shields.io/badge/zustand-000000?style=for-the-badge&logoColor=white">
-<!-- Recoil -->
-<img src="https://img.shields.io/badge/recoil-3578e5?style=for-the-badge&logoColor=white">
 <!-- React Router -->
 <img src="https://img.shields.io/badge/react router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white">
-<!-- React Query -->
-<img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">
-<!-- Axios -->
-<img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
-<!-- Chakra UI -->
-<img src="https://img.shields.io/badge/chakra ui-319795?style=for-the-badge&logo=chakraui&logoColor=white">
-<!-- MUI -->
-<img src="https://img.shields.io/badge/mui-007FFF?style=for-the-badge&logo=mui&logoColor=white">
 <!-- ChartJS -->
 <img src="https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=Chart.js&logoColor=white">
 <!-- styled-components -->
@@ -102,12 +110,8 @@ $ npm run dev
 <img src= "https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black"> 
 <!-- Vercel -->
 <img src= "https://img.shields.io/badge/vercel-000000?style=for-the-badge&logo=vercel&logoColor=white">
-<!-- AWS -->
-<img src= "https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
 <!-- GitHub -->
 <img src= "https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
-<!-- GitHub Actions -->
-<img src= "https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white">
 <!-- Discord -->
 <img src= "https://img.shields.io/badge/discord-5865F2?style=for-the-badge&logo=discord&logoColor=white">
 <!-- notion -->
@@ -115,49 +119,173 @@ $ npm run dev
 </p>
 <!-- 선택사항: 각 기술의 선정 이유 -->
 
-- `Vite` : 선정 이유
-- `React Query` : 선정 이유
-- `Zustand` : 선정 이유
-  <!--  -->
-  <br />
+- `Vite` : 번들링을 생략, 개발 서버를 빠르게 구동,  HTTP 상태 코드를 활용한다.
+- `react-chartjs-2` : React 컴포넌트 구문으로 사용가능, Chart.js 기반, GitHub stars: 5.7K+, npm 다운로드수 770K+
+- `chartjs` : 막대 차트와 라인차트
+- `react-router-dom` : useSearchParams를 이용하여 url params를 상태변수처럼 다루기 위해 사용함
+
+<!-- -->
+<br />
+<br />
 
 ## 📂 폴더 구조
 
 <!--
-  file-tree-generator(VSCode Extension) 설치
-  => 파일 탐색기에서 우클릭
-  => Generate to Tree 클릭
-  => 복사 및 붙여넣기
+file-tree-generator(VSCode Extension) 설치
+=> 파일 탐색기에서 우클릭
+=> Generate to Tree 클릭
+=> 복사 및 붙여넣기
 -->
 
 ```
-
+📦src
+ ┣ 📂constants
+ ┃ ┣ 📜chart.ts
+ ┃ ┣ 📜color.ts
+ ┃ ┗ 📜index.ts
+ ┣ 📂hooks
+ ┃ ┣ 📜index.ts
+ ┃ ┗ 📜useChartDatas.ts
+ ┣ 📂pages
+ ┃ ┣ 📜ChartPage.tsx
+ ┃ ┗ 📜index.ts
+ ┣ 📂types
+ ┃ ┣ 📜chart.ts
+ ┃ ┗ 📜index.ts
+ ┣ 📂utils
+ ┃ ┣ 📜extractRegionFrom.ts
+ ┃ ┣ 📜index.ts
+ ┃ ┣ 📜makeChartColors.ts
+ ┃ ┗ 📜reformChartData.ts
+ ┣ 📜App.tsx
+ ┣ 📜main.tsx
+ ┣ 📜Router.tsx
+ ┗ 📜vite-env.d.ts
 ```
 
 <!--  -->
- <br />
+<br />
+<br />
 
 ## 🥇 모범 사례
 
-### 예시 1) \<Navigate to="/main" replace />
+### 차트 데이터 관리 훅
 
-`/`으로 접속한 유저를 `/main`으로 리다이렉트할 때 옵션값으로 `replace`를 주어 최상위 히스토리를 대체하게 했다. 이 옵션값을 주지 않으면 `/main`에서 뒤로가기를 해도 `/main`으로 돌아오게 되어 갇힌다.
+차트 데이터를 fetch할 때 로딩과 에러 상태를 관리하기 위해 훅으로 추상화했습니다.
 
-### 예시 2) useModal 훅
+- **useChartDatas.ts**
+    
+    ```tsx
+    function useChartDatas(){
+    	const [isLoading, setIsLoading] = useState(true);
+      const [chartDatas, setChartDatas] = useState<ReformedChartData[]>([]);
+      const [error, setError] = useState<Error | null>(null);
+    
+      useEffect(() => {
+        async function fetchChartDatas() {
+          try {
+            const res = await fetch('/flexsys_mock_data.json');
+    
+            if (!res.ok) throw new Error('네트워크 에러');
+    
+            const { response } = (await res.json()) as ChartDataResponse;
+            const chartDatas = reformChartData(response);
+            setChartDatas(chartDatas);
+          } catch (error) {
+            setError(error as Error);
+          } finally {
+            setIsLoading(false);
+          }
+        }
+    
+        if (chartDatas.length === 0) fetchChartDatas();
+      }, [chartDatas.length]);
+    
+      return { isLoading, chartDatas, error };
+    }
+    ```
+<br />   
 
-<!-- 예시 코드나 이미지 등 첨부-->
+### 차트 시인성 개선
+![1단계](https://user-images.githubusercontent.com/83561523/225860895-34e13720-c082-492d-9b4e-3fbbb94e9a89.png)
 
-```js
-// useModal 선언부
-export default function useModal(){
-  ...
+value_bar와 value_area 값의 차이가 **1000배** 이상이라 그대로 그래프에 출력하면 value_area는 상대적으로 바닥에 붙어있어 파악이 힘들었습니다. - 1번 이미지
+
+![2단계](https://user-images.githubusercontent.com/83561523/225861052-c88e5d03-b429-4a14-854b-bfcb653213c9.png)
+
+
+차트의 Y축을 두 개로 나누었는데 두 그래프 Y축 범위가 같아져서 각 값들을 구별하기가 어려워졌습니다. - 2번 이미지
+
+![3단계](https://user-images.githubusercontent.com/83561523/225861081-e87b1cce-ec9f-48c5-a097-74be21769e08.png)
+
+최종적으로 X축의 tick 범위를 조정해 차트의 시인성을 개선했습니다. - 3번 이미지
+
+<br />
+
+### 버튼 클릭시 상태관리
+
+필터에 사용되는 값을 `state`로 관리하면 새로고침이나 뒤로가기 시에 휘발되어 필터링된 상태를 유지할 수 없다는 단점이 있었습니다. 이는 UX를 저해하기에 `react-router-dom`에서 제공하는 `useSearchParams` 훅을 사용해 쿼리스트링으로 관리함으로써 필터 상태를 유지하도록 구현했습니다. 
+
+예시) `http://127.0.0.1:5173/?region=성북구`
+
+<br />
+
+### 데이터 재설정
+
+fetch로 가져온 데이터를 클라이언트에서 사용하기 쉽도록 다시 구조화 하였습니다
+
+```tsx
+interface reformedChartData {
+  bar: number;
+  area: number;
+  region: string;
+  timestamp: string;
 }
-
-// useModal 호출부
-const { modal, openModal, closeModal } = useModal();
 ```
 
-모달을 관리하는 로직을 `useModal` 훅으로 분리해서 어디서나 모달을 조작할 수 있게 했다.
+<br />
+
+### type-only import / export
+
+import/export 하는 것이 타입임을 명시하는 문법입니다. 런타임에 사용되지 않아도 되는 import를 구분하여 컴파일 결과에서 제외함으로써 혹시 모를 에러를 방지할 수 있고, 빌드의 크기도 줄어듭니다. 개발자 입장에서도 import/export 하는 코드가 타입인지, 값을 담은 변수나 함수인지 구별할 수 있게 해줍니다.
+
+```tsx
+interface ChartData {
+  [timestamp: string]: {
+    id: string;
+    value_bar: number;
+    value_area: number;
+  };
+}
+
+export type { ChartData };
+```
+
+<br />
+
+### utils 함수 사용
+
+반복되는 코드를 줄이기 위해서 **mkaeChartColors** 함수를 사용하여 코드를 구조화 하였습니다. 
+
+```tsx
+const barColors = makeChartColors('bar', chartDatas, selectedRegion);
+const areaColors = makeChartColors('area', chartDatas, selectedRegion);
+```
+
+<br />
+
+### datasets pasing 속성 사용
+
+area차트와 bar차트를 위한 데이터를 따로 생성하지 않고 dataset의 pasing 속성을 사용하였습니다
+
+```tsx
+...
+parsing: {
+      xAxisKey: 'timestamp',
+      yAxisKey: 'area',
+    },
+...
+```
 
 <br />
 
@@ -167,73 +295,84 @@ const { modal, openModal, closeModal } = useModal();
 
 과제의 요구사항을 분석하고 세세한 항목으로 나눠 분류합니다.
 
+
 ### 2. 이슈 발행
 
-분석한 요구사항을 기간에 맞게 분배한 후 각 날짜에 해당하는 이슈([템플릿](.github/ISSUE_TEMPLATE/requirement-template.md))를 생성합니다.
+분석한 요구사항을 기간에 맞게 분배한 후 각 날짜에 해당하는 이슈([템플릿](https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6/issues))를 생성합니다.
+
 
 ### 3. 구현 & PR
 
-각자 해당 날짜의 이슈를 코드로 구현하고 커밋([git 컨벤션](.gitmessage.txt))하고 PR([템플릿](.github/PULL_REQUEST_TEMPLATE.md))을 올립니다.
+각자 해당 날짜의 이슈를 코드로 구현하고 커밋([git 컨벤션](https://www.notion.so/.gitmessage.txt))하고 PR([템플릿](https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6/pulls))을 올립니다.
+
 
 ### 4. 코드 리뷰
 
-각자의 PR을 보며 코드 리뷰를 합니다.
+각자의 PR을 보며 코드 리뷰를 합니다.   
+
 
 ### 5. 모범 사례 선정
 
-요구사항을 기록한 이슈에서 해당 이슈의 모범 사례라고 생각하는 PR의 번호를 작성해 투표합니다.  
-모범 사례에 가장 가까운 PR을 선정하고 다른 PR의 모범 사례를 적용해 부족한 점을 보완합니다.
+요구사항을 기록한 이슈에서 해당 이슈의 모범 사례라고 생각하는 PR의 번호를 작성해 투표([git Discussions](https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6/discussions))합니다. 모범 사례에 가장 가까운 PR을 선정하고 다른 PR의 모범 사례를 적용해 부족한 점을 보완합니다.
+
 
 ### 6. Merge
 
 보완한 코드로 PR을 올려 Merge 하고 다음 요구사항 이슈에 대해 반복합니다.
 
 <!-- <table>
-  <tbody>
-    <tr>
-      <td style="font-weight: bold">build</td>
-      <td>CI configuration 파일 또는 scripts의 변경사항</td>
-    </tr>
-    <tr>
-      <td style="font-weight: bold">ci</td>
-      <td>빌드 시스템이나 외부 의존성에 영향을 미치는 변경사항</td>
-    </tr>
-    <tr>
-      <td style="font-weight: bold">config</td>
-      <td>설정 관련 파일 작성 또는 변경</td>
-    </tr>
-    <tr>
-      <td style="font-weight: bold">docs</td>
-      <td>문서 변경사항</td>
-    </tr>
-    <tr>
-      <td style="font-weight: bold">feat</td>
-      <td>새로운 기능 추가</td>
-    </tr>
-    <tr>
-      <td style="font-weight: bold">fix</td>
-      <td>버그 수정</td>
-    </tr>
-    <tr>
-      <td style="font-weight: bold">perf</td>
-      <td>성능을 향상시키는 변경사항</td>
-    </tr>
-    <tr>
-      <td style="font-weight: bold">refactor</td>
-      <td>기능 추가나 버그 수정이 아닌 변경 사항</td>
-    </tr>
-    <tr>
-      <td style="font-weight: bold">remove</td>
-      <td>코드나 파일 제거</td>
-    </tr>
-    <tr>
-      <td style="font-weight: bold">style</td>
-      <td>스타일(CSS) 변경사항</td>
-    </tr>
-  </tbody>
+<tbody>
+<tr>
+<td style="font-weight: bold">build</td>
+<td>CI configuration 파일 또는 scripts의 변경사항</td>
+</tr>
+<tr>
+<td style="font-weight: bold">ci</td>
+<td>빌드 시스템이나 외부 의존성에 영향을 미치는 변경사항</td>
+</tr>
+<tr>
+<td style="font-weight: bold">config</td>
+<td>설정 관련 파일 작성 또는 변경</td>
+</tr>
+<tr>
+<td style="font-weight: bold">docs</td>
+<td>문서 변경사항</td>
+</tr>
+<tr>
+<td style="font-weight: bold">feat</td>
+<td>새로운 기능 추가</td>
+</tr>
+<tr>
+<td style="font-weight: bold">fix</td>
+<td>버그 수정</td>
+</tr>
+<tr>
+<td style="font-weight: bold">perf</td>
+<td>성능을 향상시키는 변경사항</td>
+</tr>
+<tr>
+<td style="font-weight: bold">refactor</td>
+<td>기능 추가나 버그 수정이 아닌 변경 사항</td>
+</tr>
+<tr>
+<td style="font-weight: bold">remove</td>
+<td>코드나 파일 제거</td>
+</tr>
+<tr>
+<td style="font-weight: bold">style</td>
+<td>스타일(CSS) 변경사항</td>
+</tr>
+</tbody>
 </table> -->
 
 <!--  -->
+
+<br />
+
+
+# ⚒️ Refactoring
+
+<br />
 <br />
 
 ## 👥 팀 구성원
