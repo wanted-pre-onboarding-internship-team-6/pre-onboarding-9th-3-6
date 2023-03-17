@@ -1,12 +1,22 @@
+import { Suspense, lazy } from 'react';
+
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { ChartPage } from '@/pages';
+import ErrorBoundary from './components/ErrorBoundary';
+
+const ChartPage = lazy(() => import('@/pages/ChartPage'));
 
 export default function Router() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <ChartPage />,
+      element: (
+        <ErrorBoundary fallback={<div>Error...</div>}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ChartPage />
+          </Suspense>
+        </ErrorBoundary>
+      ),
     },
   ]);
 

@@ -34,7 +34,7 @@ ChartJS.register(
 );
 
 export default function ChartPage() {
-  const { isLoading, chartDatas, error } = useChartDatas();
+  const { chartDatas } = useChartDatas();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const selectedRegion = searchParams.get('region');
@@ -120,8 +120,8 @@ export default function ChartPage() {
     },
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>error</div>;
+  // if (isLoading) return <div>Loading...</div>;
+  // if (error) return <div>error</div>;
 
   return (
     <>
