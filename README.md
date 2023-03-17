@@ -298,7 +298,7 @@ parsing: {
 
 ### 2. 이슈 발행
 
-분석한 요구사항을 기간에 맞게 분배한 후 각 날짜에 해당하는 이슈([템플릿](https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6/issues))를 생성합니다.
+분석한 요구사항을 기간에 맞게 분배한 후 각 날짜에 해당하는 [이슈](https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6/issues)를 생성합니다.
 
 
 ### 3. 구현 & PR
