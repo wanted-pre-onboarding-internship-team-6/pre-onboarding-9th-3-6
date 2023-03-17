@@ -303,7 +303,7 @@ parsing: {
 
 ### 3. 구현 & PR
 
-각자 해당 날짜의 이슈를 코드로 구현하고 커밋([git 컨벤션](https://www.notion.so/.gitmessage.txt))하고 PR([템플릿](https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6/pulls))을 올립니다.
+각자 해당 날짜의 이슈를 코드로 구현하고 커밋([git 컨벤션](https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6/blob/main/.gitmessage.txt))하고 PR([템플릿](https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6/pulls))을 올립니다.
 
 
 ### 4. 코드 리뷰
