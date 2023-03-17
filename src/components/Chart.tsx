@@ -88,6 +88,15 @@ export default function ChartPage() {
       intersect: true,
     },
     scales: {
+      x: {
+        ticks: {
+          callback: function (_, index) {
+            return index % 10 === 0
+              ? chartDatas[index].timestamp.split(' ')[1]
+              : null;
+          },
+        },
+      },
       y: {
         type: 'linear',
         position: 'left',
@@ -115,6 +124,15 @@ export default function ChartPage() {
     animation: false,
     plugins: {
       tooltip: {
+        displayColors: false,
+        titleAlign: 'center',
+        bodyAlign: 'center',
+        bodySpacing: 5,
+        padding: 20,
+        backgroundColor: `${COLOR_CODE.ashedBlue}`,
+        titleColor: `${COLOR_CODE.darkBlue}`,
+        titleFont: { weight: 'bold', size: 20 },
+        bodyFont: { weight: 'normal', size: 15 },
         callbacks: {
           title: (context) => extractRegionFrom(context, chartDatas),
         },
