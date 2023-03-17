@@ -13,7 +13,6 @@
 
 <!--  -->
 <br />
-<br />
 
 ## 📝 과제 소개
 
@@ -23,32 +22,30 @@
 - 주어진 mock 데이터를 기반으로 시계열 차트 만들기
 
 <br />
-<br />
 
 ### 과제 요구사항
 
 1. 시계열 차트 만들기
-    - 주어진 JSON 데이터의 `key`값(시간)을 기반으로 시계열 차트를 만들어주세요
-    - 하나의 차트안에 Area 형태의 그래프와 Bar 형태의 그래프가 모두 존재하는 복합 그래프로 만들어주세요
-    - Area 그래프의 기준값은 `value_area` 값을 이용해주세요
-    - Bar 그래프의 기준값은 `value_bar` 값을 이용해주세요
-    - 차트의 Y축에 대략적인 수치를 표현해주세요(예시 이미지 참고)
+   - 주어진 JSON 데이터의 `key`값(시간)을 기반으로 시계열 차트를 만들어주세요
+   - 하나의 차트안에 Area 형태의 그래프와 Bar 형태의 그래프가 모두 존재하는 복합 그래프로 만들어주세요
+   - Area 그래프의 기준값은 `value_area` 값을 이용해주세요
+   - Bar 그래프의 기준값은 `value_bar` 값을 이용해주세요
+   - 차트의 Y축에 대략적인 수치를 표현해주세요(예시 이미지 참고)
 
 <br />
 
 2. 호버 기능 구현
-    - 특정 데이터 구역에 마우스 호버시 `id, value_area, value_bar` 데이터를 툴팁 형태로 제공해주세요
+   - 특정 데이터 구역에 마우스 호버시 `id, value_area, value_bar` 데이터를 툴팁 형태로 제공해주세요
 
 <br />
 
 3. 필터링 기능 구현
-    - 필터링 기능을 구현해주세요, 필터링은 특정 데이터를 하이라이트 하는 방식으로 구현해주세요
-    - 필터링 기능은 버튼 형태로 ID값(지역이름)을 이용해주세요
-    - 필터링 시 버튼에서 선택한 ID값과 동일한 ID값을 가진 데이터 구역만 하이라이트 처리를 해주세요
-    - 특정 데이터 구역을 클릭 시에도 필터링 기능과 동일한 형태로 동일한 ID값을 가진 데이터 구역을 하이라이트해주세요
+   - 필터링 기능을 구현해주세요, 필터링은 특정 데이터를 하이라이트 하는 방식으로 구현해주세요
+   - 필터링 기능은 버튼 형태로 ID값(지역이름)을 이용해주세요
+   - 필터링 시 버튼에서 선택한 ID값과 동일한 ID값을 가진 데이터 구역만 하이라이트 처리를 해주세요
+   - 특정 데이터 구역을 클릭 시에도 필터링 기능과 동일한 형태로 동일한 ID값을 가진 데이터 구역을 하이라이트해주세요
 
 <!--  -->
-<br />
 <br />
 
 ## 🕹️ 실행 방법
@@ -62,14 +59,12 @@ $ npm run dev
 
 <!--  -->
 <br />
-<br />
 
 ## 🔗 배포 링크
 
 [바로 가기](https://pre-onboarding-9th-3-6.vercel.app/)
 
 <!--  -->
-<br />
 <br />
 
 ## 🛠️ 기술 스택
@@ -98,8 +93,6 @@ $ npm run dev
 <img src="https://img.shields.io/badge/react router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white">
 <!-- ChartJS -->
 <img src="https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=Chart.js&logoColor=white">
-<!-- styled-components -->
-<img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
 <!-- emotion -->
 <img src="https://img.shields.io/badge/emotion-D26AC2?style=for-the-badge&logoColor=white">
 <!-- Husky -->
@@ -119,13 +112,12 @@ $ npm run dev
 </p>
 <!-- 선택사항: 각 기술의 선정 이유 -->
 
-- `Vite` : 번들링을 생략, 개발 서버를 빠르게 구동,  HTTP 상태 코드를 활용한다.
+- `Vite` : 빠른 번들링 속도와 네이티브 ESM 사용 등으로 빠르고 효율적인 웹 개발을 가능하게 함.
+- `chartjs` : canvas를 이용한 차트를 간편히 구현하기 위해 사용함.
 - `react-chartjs-2` : React 컴포넌트 구문으로 사용가능, Chart.js 기반, GitHub stars: 5.7K+, npm 다운로드수 770K+
-- `chartjs` : 막대 차트와 라인차트
-- `react-router-dom` : useSearchParams를 이용하여 url params를 상태변수처럼 다루기 위해 사용함
+- `react-router-dom` : `useSearchParams`를 이용하여 url querystring를 상태변수처럼 다루기 위해 사용함
 
 <!-- -->
-<br />
 <br />
 
 ## 📂 폴더 구조
@@ -139,6 +131,18 @@ file-tree-generator(VSCode Extension) 설치
 
 ```
 📦src
+ ┣ 📂api
+ ┃ ┣ 📜chartDatas.ts
+ ┃ ┗ 📜index.ts
+ ┣ 📂components
+ ┃ ┣ 📜AsyncBoundary.tsx
+ ┃ ┣ 📜Chart.tsx
+ ┃ ┣ 📜Error.tsx
+ ┃ ┣ 📜ErrorBoundary.tsx
+ ┃ ┣ 📜index.ts
+ ┃ ┣ 📜Layout.tsx
+ ┃ ┣ 📜Loading.tsx
+ ┃ ┗ 📜RegionFilter.tsx
  ┣ 📂constants
  ┃ ┣ 📜chart.ts
  ┃ ┣ 📜color.ts
@@ -149,14 +153,18 @@ file-tree-generator(VSCode Extension) 설치
  ┣ 📂pages
  ┃ ┣ 📜ChartPage.tsx
  ┃ ┗ 📜index.ts
+ ┣ 📂styles
+ ┃ ┗ 📜reset.ts
  ┣ 📂types
  ┃ ┣ 📜chart.ts
  ┃ ┗ 📜index.ts
  ┣ 📂utils
+ ┃ ┣ 📜delayFailRandomly.ts
  ┃ ┣ 📜extractRegionFrom.ts
  ┃ ┣ 📜index.ts
  ┃ ┣ 📜makeChartColors.ts
- ┃ ┗ 📜reformChartData.ts
+ ┃ ┣ 📜reformChartData.ts
+ ┃ ┗ 📜suspend.ts
  ┣ 📜App.tsx
  ┣ 📜main.tsx
  ┣ 📜Router.tsx
@@ -165,66 +173,78 @@ file-tree-generator(VSCode Extension) 설치
 
 <!--  -->
 <br />
-<br />
 
 ## 🥇 모범 사례
 
-### 차트 데이터 관리 훅
+### 커스텀 훅
 
-차트 데이터를 fetch할 때 로딩과 에러 상태를 관리하기 위해 훅으로 추상화했습니다.
+차트 데이터를 훅으로 관리했습니다.
 
-- **useChartDatas.ts**
-    
-    ```tsx
-    function useChartDatas(){
-    	const [isLoading, setIsLoading] = useState(true);
-      const [chartDatas, setChartDatas] = useState<ReformedChartData[]>([]);
-      const [error, setError] = useState<Error | null>(null);
-    
-      useEffect(() => {
-        async function fetchChartDatas() {
-          try {
-            const res = await fetch('/flexsys_mock_data.json');
-    
-            if (!res.ok) throw new Error('네트워크 에러');
-    
-            const { response } = (await res.json()) as ChartDataResponse;
-            const chartDatas = reformChartData(response);
-            setChartDatas(chartDatas);
-          } catch (error) {
-            setError(error as Error);
-          } finally {
-            setIsLoading(false);
-          }
-        }
-    
-        if (chartDatas.length === 0) fetchChartDatas();
-      }, [chartDatas.length]);
-    
-      return { isLoading, chartDatas, error };
-    }
-    ```
-<br />   
+<details>
+<summary>useChartDatas.ts</summary>
+<div markdown="1">
+
+```tsx
+import { useState } from 'react';
+
+import { fetchChartDatas } from '@/api';
+import { delayFailRandomly, reformChartData, suspend } from '@/utils';
+
+import type { ChartData, ReformedChartData } from '@/types';
+
+const suspended = suspend(() => delayFailRandomly(fetchChartDatas));
+
+export default function useChartDatas() {
+  const [chartDatas, setChartDatas] = useState<ReformedChartData[]>([]);
+
+  if (chartDatas.length === 0) {
+    const response = suspended.promise.resolved() as ChartData;
+    const chartData = reformChartData(response);
+
+    setChartDatas(chartData);
+  }
+
+  return { chartDatas };
+}
+```
+
+</div>
+</details>
+
+<br />
 
 ### 차트 시인성 개선
+
+<details>
+<summary>1단계 value_bar와 value_area 값의 차이가 **1000배** 이상이라 그대로 그래프에 출력하면 value_area는 상대적으로 바닥에 붙어있어 파악이 힘들었습니다.</summary>
+<div markdown="1">
+
 ![1단계](https://user-images.githubusercontent.com/83561523/225860895-34e13720-c082-492d-9b4e-3fbbb94e9a89.png)
 
-value_bar와 value_area 값의 차이가 **1000배** 이상이라 그대로 그래프에 출력하면 value_area는 상대적으로 바닥에 붙어있어 파악이 힘들었습니다. - 1번 이미지
+</div>
+</details>
+
+<details>
+<summary>2단계 차트의 Y축을 두 개로 나누었는데 두 그래프 Y축 범위가 같아져서 각 값들을 구별하기가 어려워졌습니다.</summary>
+<div markdown="1">
 
 ![2단계](https://user-images.githubusercontent.com/83561523/225861052-c88e5d03-b429-4a14-854b-bfcb653213c9.png)
 
+</div>
+</details>
 
-차트의 Y축을 두 개로 나누었는데 두 그래프 Y축 범위가 같아져서 각 값들을 구별하기가 어려워졌습니다. - 2번 이미지
+3단계 최종적으로 X축의 tick 범위를 조정해 차트의 시인성을 개선했습니다.
 
 ![3단계](https://user-images.githubusercontent.com/83561523/225861081-e87b1cce-ec9f-48c5-a097-74be21769e08.png)
 
-최종적으로 X축의 tick 범위를 조정해 차트의 시인성을 개선했습니다. - 3번 이미지
+<!--
+![chartfinal](https://user-images.githubusercontent.com/60649092/225910555-8a11e8b7-c8fa-49bc-9145-d4db12e427c3.png) -->
 
 <br />
 
 ### 버튼 클릭시 상태관리
 
-필터에 사용되는 값을 `state`로 관리하면 새로고침이나 뒤로가기 시에 휘발되어 필터링된 상태를 유지할 수 없다는 단점이 있었습니다. 이는 UX를 저해하기에 `react-router-dom`에서 제공하는 `useSearchParams` 훅을 사용해 쿼리스트링으로 관리함으로써 필터 상태를 유지하도록 구현했습니다. 
+필터에 사용되는 값을 `state`로 관리하면 새로고침이나 뒤로가기 시에 휘발되어 필터링된 상태를 유지할 수 없다는 단점이 있었습니다. 이는 UX를 저해하기에 `react-router-dom`에서 제공하는 `useSearchParams` 훅을 사용해 쿼리스트링으로 관리함으로써 필터 상태를 유지하도록 구현했습니다.
 
 예시) `http://127.0.0.1:5173/?region=성북구`
 
@@ -232,6 +252,9 @@ value_bar와 value_area 값의 차이가 **1000배** 이상이라 그대로 그�
 
 ### 데이터 재설정
 
+<details>
+<summary>fetch로 가져온 데이터를 클라이언트에서 사용하기 쉽도록 다시 구조화 하였습니다</summary>
+<div markdown="1">
 fetch로 가져온 데이터를 클라이언트에서 사용하기 쉽도록 다시 구조화 하였습니다
 
 ```tsx
@@ -242,6 +265,9 @@ interface reformedChartData {
   timestamp: string;
 }
 ```
+
+</div>
+</details>
 
 <br />
 
@@ -263,13 +289,34 @@ export type { ChartData };
 
 <br />
 
-### utils 함수 사용
+### Suspense, ErrorBoundary
 
-반복되는 코드를 줄이기 위해서 **mkaeChartColors** 함수를 사용하여 코드를 구조화 하였습니다. 
+컴포넌트의 로딩과 에러 상태를 선언적으로 다루기 위해 Suspense와 ErrorBoundary 조합해 AsyncBoundary를 만들어 활용했습니다.
 
 ```tsx
-const barColors = makeChartColors('bar', chartDatas, selectedRegion);
-const areaColors = makeChartColors('area', chartDatas, selectedRegion);
+export default function ChartPage() {
+  return (
+    <AsyncBoundary loading={<Loading />} error={<Error />}>
+      <Chart />
+    </AsyncBoundary>
+  );
+}
+```
+
+<br />
+
+### utils 함수 사용
+
+반복되는 코드를 줄이기 위해서 유틸 함수를 사용하여 코드를 구조화 하였습니다.
+
+```
+📦utils
+ ┣ 📜delayFailRandomly.ts
+ ┣ 📜extractRegionFrom.ts
+ ┣ 📜index.ts
+ ┣ 📜makeChartColors.ts
+ ┣ 📜reformChartData.ts
+ ┗ 📜suspend.ts
 ```
 
 <br />
@@ -281,9 +328,9 @@ area차트와 bar차트를 위한 데이터를 따로 생성하지 않고 datase
 ```tsx
 ...
 parsing: {
-      xAxisKey: 'timestamp',
-      yAxisKey: 'area',
-    },
+  xAxisKey: 'timestamp',
+  yAxisKey: 'area',
+},
 ...
 ```
 
@@ -295,26 +342,21 @@ parsing: {
 
 과제의 요구사항을 분석하고 세세한 항목으로 나눠 분류합니다.
 
-
 ### 2. 이슈 발행
 
 분석한 요구사항을 기간에 맞게 분배한 후 각 날짜에 해당하는 [이슈](https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6/issues)를 생성합니다.
-
 
 ### 3. 구현 & PR
 
 각자 해당 날짜의 이슈를 코드로 구현하고 커밋([git 컨벤션](https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6/blob/main/.gitmessage.txt))하고 [PR](https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6/pulls)을 올립니다.
 
-
 ### 4. 코드 리뷰
 
-각자의 PR을 보며 코드 리뷰를 합니다.   
-
+각자의 PR을 보며 코드 리뷰를 합니다.
 
 ### 5. 모범 사례 선정
 
 요구사항을 기록한 이슈에서 해당 이슈의 모범 사례라고 생각하는 PR의 번호를 작성해 투표([git Discussions](https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6/discussions))합니다. 모범 사례에 가장 가까운 PR을 선정하고 다른 PR의 모범 사례를 적용해 부족한 점을 보완합니다.
-
 
 ### 6. Merge
 
@@ -367,12 +409,6 @@ parsing: {
 
 <!--  -->
 
-<br />
-
-
-# ⚒️ Refactoring
-
-<br />
 <br />
 
 ## 👥 팀 구성원
