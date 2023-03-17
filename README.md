@@ -3,9 +3,9 @@
 ## 📜 목차
 
 1. [과제 소개](#-과제-소개)
-2. [실행 방법](#-실행-방법)
+2. [실행 방법](https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6/edit/main/README.md#%EF%B8%8F-%EC%8B%A4%ED%96%89-%EB%B0%A9%EB%B2%95)
 3. [배포 링크](#-배포-링크)
-4. [기술 스택](#-기술-스택)
+4. [기술 스택](https://github.com/wanted-pre-onboarding-internship-team-6/pre-onboarding-9th-3-6/edit/main/README.md#%EF%B8%8F-%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
 5. [폴더 구조](#-폴더-구조)
 6. [모범 사례](#-모범-사례)
 7. [협업 방식](#-협업-방식)
